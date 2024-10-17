@@ -74,8 +74,8 @@ namespace SteveModTemplate
     public class PluginInfo
     {
         internal const string
-            GUID = "Steve.SteveModTemplate", // Unique identifier for the mod
-            Name = "SteveModTemplate", // Display name of your mod
-            Version = "1.0.0"; // Current version of your mod
+            GUID = "Sudzy.PlayerMOTD",
+            Name = "PlayerMOTD",
+            Version = "1.0.0";
     }
 }
