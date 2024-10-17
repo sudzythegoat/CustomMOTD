@@ -1,4 +1,14 @@
-GameObject.Find("motdtext").GetComponent<Text>().text = "<color=white>Player Name: " + player.NickName + " Player ID: " + player.UserId + "</color>"; // MOTD MAIN TEXT
-GameObject.Find("COC Text").GetComponent<Text>().text = "<color=red>test</color>"; // CODE OF CONDUCT Text
-GameObject.Find("CodeOfConduct").GetComponent<Text>().text = "<color=yellow>InputHere</color>"; // CODE OF CONDUCT TITLE TEXT
-GameObject.Find("motd").GetComponent<Text>().text = "<color=yellow>InputHere</color>"; // MOTD TITLE TEXT
+class Mod
+{
+  public static void ModtPlayers()
+  {
+    string things = "";
+    foreach (var player in PhotonNetwork.PlayerList)
+    {  
+      things += "<color=white>\nPlayer Name: " + player.NickName + " Player ID: " + player.UserId + "</color>";
+      GameObject.Find("motd").GetComponent<Text>().text = "<color=yellow>InputHere</color>";
+    }
+    GameObject.Find("motdtext").GetComponent<Text>().text = things
+    GameObject.Find("motd").GetComponent<Text>().text = "<color=white>Players</color>";
+  }
+}
