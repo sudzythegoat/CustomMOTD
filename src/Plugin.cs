@@ -15,6 +15,7 @@ namespace SteveModTemplate
         public static Plugin Instance { get; private set; } // Singleton instance for easy access
         public static bool IsEnabled { get; private set; } // Tracks if the mod is enabled
         public static bool IsRoomModded { get; private set; } // Tracks if you are in a modded code or not.
+        bool isNotModded = PhotonNetwork.InRoom && !PhotonNetwork.CurrentRoom.CustomProperties.ToString().Contains("MODDED")
 
         // Initializing event subscriptions
         public void Start()
@@ -49,6 +50,22 @@ namespace SteveModTemplate
             }
         }
 
+        public static void JoinModded()
+        {
+            PhotonNetwork.JoinRandomRoom(new ExitGames.Client.Photon.Hashtable { { "MODDED", true } });
+        }
+
+        public static void Leave()
+        {
+            PhotonNetwork.Disconnect();
+        }
+
+        private static async Task wait(amount)
+        {
+            amount / 1000f
+            await Task.Delay(amount);
+        }
+        
         // Called when the game is initialized, ideal for loading assets
         public void OnGameInitialized(object sender, EventArgs e)
         {
@@ -67,6 +84,19 @@ namespace SteveModTemplate
             }
             GameObject.Find("motdtext").GetComponent<Text>().text = things
             GameObject.Find("motd").GetComponent<Text>().text = "<color=white>Players:</color>";
+            //IsRoomModded = PhotonNetwork.InRoom && PhotonNetwork.CurrentRoom.CustomProperties.ToString().Contains("MODDED"); // Checks if the lobby is modded.
+            //^not needed :)
+            AntiBan();
+        }
+
+        private static async void AntiBan()
+        {
+            if (isNotModded)
+            {
+                Leave();
+                wait(1);
+                JoinModded();
+            }
         }
     }
 
