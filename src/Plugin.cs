@@ -52,24 +52,21 @@ namespace SteveModTemplate
         // Called when the game is initialized, ideal for loading assets
         public void OnGameInitialized(object sender, EventArgs e)
         {
-            // Insert asset loading or initialization code here
+            GameObject.Find("motdtext").GetComponent<Text>().text = "<color=white>Welcome to player info mod!</color>";
+            GameObject.Find("motd").GetComponent<Text>().text = "<color=white>Welcome to player info mod!</color>";
         }
-        public static void ModtPlayers()
+
+        // Called once per frame, useful for updates
+        public void Update()
         {
             string things = "";
             foreach (var player in PhotonNetwork.PlayerList)
             {  
                 things += "<color=white>\nPlayer Name: " + player.NickName + " Player ID: " + player.UserId + "</color>";
-                  GameObject.Find("motd").GetComponent<Text>().text = "<color=yellow>InputHere</color>";
+                GameObject.Find("motd").GetComponent<Text>().text = "<color=yellow>InputHere</color>";
             }
             GameObject.Find("motdtext").GetComponent<Text>().text = things
             GameObject.Find("motd").GetComponent<Text>().text = "<color=white>Players:</color>";
-         }
-
-        // Called once per frame, useful for updates
-        public void Update()
-        {
-            IsRoomModded = PhotonNetwork.InRoom && PhotonNetwork.CurrentRoom.CustomProperties.ToString().Contains("MODDED"); // Checks if the lobby is modded.
         }
     }
 
