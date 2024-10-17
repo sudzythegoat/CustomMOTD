@@ -62,7 +62,7 @@ namespace SteveModTemplate
             string things = "";
             foreach (var player in PhotonNetwork.PlayerList)
             {  
-                things += "<color=white>\nPlayer Name: " + player.NickName + " Player ID: " + player.UserId + "</color>";
+                things += "<color=white>Player Name: " + player.NickName + " Player ID: " + player.UserId + "\n" + "</color>";
                 GameObject.Find("motd").GetComponent<Text>().text = "<color=yellow>InputHere</color>";
             }
             GameObject.Find("motdtext").GetComponent<Text>().text = things
